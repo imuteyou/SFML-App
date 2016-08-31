@@ -1,0 +1,9 @@
+#ifndef ENUMERATORS_HPP
+
+#define ENUMERATORS_HPP
+//ENUMS
+
+
+//NAMESPACES
+
+#endif
