@@ -9,6 +9,7 @@
 
 
 #include "ResourceHolder.hpp"
+#include "World.hpp"
 #include "ResourceIdentifiers.hpp"
 
 
@@ -32,6 +33,7 @@ private:
 	sf::RenderWindow			mWindow;
 	TextureHolder				mTextureHolder;
 	FontHolder					mFontHolder;
+	World						mWorld;
 
 private:
 	struct						statistics

@@ -16,14 +16,18 @@ class Entity
 public:
 												Entity();
 
+public:
+	void										setVelocity(sf::Vector2f velocity);
+	void										addVelocity(sf::Vector2f velocity);
+	void										setVelocity(float vx, float vy);
+	void										addVelocity(float vx, float vy);
+	sf::Vector2f								getVelocity();
+	virtual void								updateCurrent(sf::Time deltaT);
+
 private:
 	sf::Vector2f								mVelocity;
 
-private:
-	virtual void								setVelocity(sf::Vector2f velocity);
-	virtual void								addVelocity(sf::Vector2f velocity);
-	virtual void								setVelocity(float vx, float vy);
-	virtual void								addVelocity(float vx, float vy);
+
 };
 
 

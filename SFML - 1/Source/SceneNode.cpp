@@ -32,16 +32,51 @@ SceneNode::Ptr SceneNode::detachChild(const SceneNode & node)
 	return result;
 }
 
+void SceneNode::update(sf::Time deltaT)
+{
+	updateCurrent(deltaT);
+	updateChildren(deltaT);
+}
+
 void SceneNode::draw(sf::RenderTarget & target, sf::RenderStates states) const
 {
 	states.transform *= getTransform();
 	drawCurrent(target, states);
-
-	for (const Ptr & child : mChildren)
-		child->draw(target, states);
+	drawChildren(target, states);
 }
 
 void SceneNode::drawCurrent(sf::RenderTarget & target, sf::RenderStates states) const
 {
+	
+}
 
+void SceneNode::drawChildren(sf::RenderTarget & target, sf::RenderStates states) const
+{
+	for (const Ptr & child : mChildren)
+		child->draw(target, states);
+}
+
+void SceneNode::updateCurrent(sf::Time deltaT)
+{
+}
+
+void SceneNode::updateChildren(sf::Time deltaT)
+{
+	for (Ptr & child : mChildren)
+		child->update(deltaT);
+}
+
+sf::Transform SceneNode::getWorldTransform() const
+{
+	sf::Transform transform;
+
+	for (const SceneNode * node = this; node != nullptr; node = node->mParent)
+		transform *= node->getTransform();
+
+	return transform;
+}
+
+sf::Vector2f SceneNode::getWorldPosition() const
+{
+	return getWorldTransform() * sf::Vector2f();
 }

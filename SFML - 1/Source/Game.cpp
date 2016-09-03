@@ -12,6 +12,7 @@ Game::Game()
 	: mWindow(sf::VideoMode(800, 600), "SFML-APP")
 	, mTextureHolder()
 	, mFontHolder()
+	, mWorld(mWindow)
 	, mStatistics()
 {
 }
@@ -44,6 +45,8 @@ void Game::run()
 void Game::render()
 {
 	mWindow.clear();
+	mWorld.draw();
+	mWindow.setView(mWindow.getDefaultView());
 
 	//RENDER THE STATISTICS INFO IF F3 WAS PRESSED
 	if(mStatistics.isActive)
@@ -54,6 +57,7 @@ void Game::render()
 
 void Game::update(sf::Time deltaT)
 {
+	mWorld.update(deltaT);
 	updateStatistics(deltaT);
 }
 
@@ -81,7 +85,7 @@ void Game::processInput()
 void Game::handleRealTimeInput()
 {
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Escape))
-		mWindow.close();		
+		mWindow.close();
 }
 
 void Game::handleEvents()
@@ -90,18 +94,19 @@ void Game::handleEvents()
 
 	while (mWindow.pollEvent(event))
 	{
-		if (event.type == sf::Event::KeyPressed)
-		{
-			if (event.key.code == sf::Keyboard::F3)
-				mStatistics.isActive = !mStatistics.isActive;
+		switch (event.type)
+		{	
+			case sf::Event::KeyPressed:
+				if(event.key.code == sf::Keyboard::F3)
+					mStatistics.isActive = !mStatistics.isActive;
+				break;
 
-			if (event.key.code == sf::Keyboard::Escape)
+			case sf::Event::Closed:
 				mWindow.close();
-		}
+				break;
 
-		if (event.type == sf::Event::Closed)
-		{
-			mWindow.close();
+			default:
+				break;
 		}
 	}
 }
@@ -111,9 +116,4 @@ void Game::loadResources()
 	// FONT-HOLDER
 	mFontHolder.loadResource(Fonts::Statistics, "Media/Fonts/OpenSans-Bold.ttf");
 	mStatistics.Text.setFont(mFontHolder.getResource(Fonts::Statistics));
-
-	// TEXTURE-HOLDER
-	mTextureHolder.loadResource(Textures::Eagle, "Media/Textures/Eagle.png");
-	mTextureHolder.loadResource(Textures::Raptor, "Media/Textures/Raptor.png");
-	mTextureHolder.loadResource(Textures::Landscape, "Media/Textures/Desert.png");
 }

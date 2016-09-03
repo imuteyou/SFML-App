@@ -15,7 +15,7 @@ namespace sf
 
 namespace Textures
 {
-	enum ID { Landscape, Eagle, Raptor, Missile };
+	enum ID { Desert, Eagle, Raptor, Missile };
 }
 
 namespace Fonts

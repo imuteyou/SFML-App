@@ -126,6 +126,8 @@
     <ClCompile Include="Source\Game.cpp" />
     <ClCompile Include="Source\SceneNode.cpp" />
     <ClCompile Include="Source\Source.cpp" />
+    <ClCompile Include="Source\SpriteNode.cpp" />
+    <ClCompile Include="Source\World.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Source\ResourceHolder.inl" />
@@ -138,7 +140,9 @@
     <ClInclude Include="Include\ResourceHolder.hpp" />
     <ClInclude Include="Include\ResourceIdentifiers.hpp" />
     <ClInclude Include="Include\SceneNode.hpp" />
+    <ClInclude Include="Include\SpriteNode.hpp" />
     <ClInclude Include="Include\StringHelpers.hpp" />
+    <ClInclude Include="Include\World.hpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
