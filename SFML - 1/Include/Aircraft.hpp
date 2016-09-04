@@ -28,6 +28,9 @@ private:
 	Type									mType;
 	sf::Sprite								mSprite;
 
+private:
+	unsigned int							getCategory() const;
+
 };
 
 #endif // !AIRCRAFT_HPP

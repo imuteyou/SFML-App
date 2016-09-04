@@ -34,6 +34,7 @@ private:
 	TextureHolder				mTextureHolder;
 	FontHolder					mFontHolder;
 	World						mWorld;
+	bool						mIsActive;
 
 private:
 	struct						statistics

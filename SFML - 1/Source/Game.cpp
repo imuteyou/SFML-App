@@ -9,10 +9,11 @@
 const sf::Time Game::timePerFrame = sf::seconds(1.0f / 600.0f);
 
 Game::Game()
-	: mWindow(sf::VideoMode(800, 600), "SFML-APP")
+	: mWindow(sf::VideoMode(1920, 1080), "SFML-APP")
 	, mTextureHolder()
 	, mFontHolder()
 	, mWorld(mWindow)
+	, mIsActive(true)
 	, mStatistics()
 {
 }
@@ -27,9 +28,12 @@ void Game::run()
 	{
 		handleRealTimeInput();
 		handleEvents();
-		timeSinceLastUpdate += clock.restart();
+		sf::Time elapsedTime = clock.restart();
 
-		while (timeSinceLastUpdate > timePerFrame)
+		if(mIsActive)
+			timeSinceLastUpdate += elapsedTime;
+
+		while (timeSinceLastUpdate > timePerFrame  && mIsActive)
 		{
 			handleRealTimeInput();
 			handleEvents();
@@ -48,7 +52,6 @@ void Game::render()
 	mWorld.draw();
 	mWindow.setView(mWindow.getDefaultView());
 
-	//RENDER THE STATISTICS INFO IF F3 WAS PRESSED
 	if(mStatistics.isActive)
 		mWindow.draw(mStatistics.Text);
 
@@ -90,6 +93,7 @@ void Game::handleRealTimeInput()
 
 void Game::handleEvents()
 {
+	mWindow.setKeyRepeatEnabled(false);
 	sf::Event event;
 
 	while (mWindow.pollEvent(event))
@@ -105,10 +109,20 @@ void Game::handleEvents()
 				mWindow.close();
 				break;
 
+			case sf::Event::LostFocus:
+				mIsActive = false;
+				break;
+
+			case sf::Event::GainedFocus:
+				mIsActive = true;
+				break;
+
 			default:
 				break;
 		}
 	}
+
+	mWindow.setKeyRepeatEnabled(true);
 }
 
 void Game::loadResources()

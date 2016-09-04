@@ -12,7 +12,7 @@ World::World(sf::RenderWindow & window)
 {
 	mWorld.Bounds.left = 0.0f;
 	mWorld.Bounds.top = 0.0f;
-	mWorld.Bounds.height = 2000.0f;
+	mWorld.Bounds.height = 20000.0f;
 	mWorld.Bounds.width = mView.getSize().x;
 	mWorld.ScrollSpeed = -50.0f;
 
@@ -72,6 +72,7 @@ void World::buildScene()
 	sf::Texture & texture = mTextureHolder.getResource(Textures::Desert);
 	sf::IntRect textureRect(mWorld.Bounds);
 	texture.setRepeated(true);
+	texture.setSmooth(true);
 
 	std::unique_ptr<SpriteNode> backgroundSprite(new SpriteNode(texture, textureRect));
 	backgroundSprite->setPosition(mWorld.Bounds.left, mWorld.Bounds.top);

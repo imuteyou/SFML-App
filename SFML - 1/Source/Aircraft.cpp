@@ -1,4 +1,5 @@
 #include "Aircraft.hpp"
+#include "Command.hpp"
 
 Textures::ID Aircraft::toTextureID(Aircraft::Type type)
 {
@@ -24,4 +25,19 @@ Aircraft::Aircraft(Type type, const TextureHolder& textures)
 void Aircraft::drawCurrent(sf::RenderTarget & target, sf::RenderStates states) const
 {
 	target.draw(mSprite, states);
+}
+
+unsigned int Aircraft::getCategory() const
+{
+	switch (mType)
+	{
+		case Eagle:
+			return Category::PlayerAircraft;
+
+		case Raptor:
+			return Category::AlliedAircraft;
+
+		default:
+			return Category::EnemyAircraft;
+	}
 }
