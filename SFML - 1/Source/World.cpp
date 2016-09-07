@@ -29,15 +29,26 @@ World::World(sf::RenderWindow & window)
 void World::update(sf::Time deltaT)
 {
 	mView.move(0.0f * deltaT.asSeconds(), mWorld.ScrollSpeed * deltaT.asSeconds());
-	sf::Vector2f playerPosition = mPlayer->getPosition();
-	sf::Vector2f playerVelocity = mPlayer->getVelocity();
+	mPlayer->setVelocity(0.0f, 0.0f);
 
-	if (playerPosition.x <= mWorld.Bounds.left + 50.0f
-		|| playerPosition.x >= mWorld.Bounds.left + mWorld.Bounds.width - 50.0f)
-	{
-		playerVelocity.x = -playerVelocity.x;
-		mPlayer->setVelocity(playerVelocity);
-	}
+	while (!mCommandQueue.isEmpty())
+		mSceneGraph.onCommand(mCommandQueue.pop(), deltaT);
+
+
+	sf::Vector2f velocity = mPlayer->getVelocity();
+	if (velocity.x != 0.0f && velocity.y != 0.0f)
+		mPlayer->setVelocity(velocity / sqrt(2.0f));
+
+	mPlayer->addVelocity(0.0f, mWorld.ScrollSpeed);
+
+	sf::FloatRect viewBounds(mView.getCenter() - mView.getSize() / 2.0f, mView.getSize());
+	const float borderDistance = 100.0f;
+	sf::Vector2f position = mPlayer->getPosition();
+	position.x = std::max(position.x, viewBounds.left + borderDistance);
+	position.x = std::min(position.x, viewBounds.left + viewBounds.width - borderDistance);
+	position.y = std::max(position.y, viewBounds.top + borderDistance);
+	position.y = std::min(position.y, viewBounds.top + viewBounds.height - borderDistance);
+	mPlayer->setPosition(position);
 
 	mSceneGraph.update(deltaT);
 }
@@ -91,4 +102,9 @@ void World::buildScene()
 	std::unique_ptr<Aircraft> rightEscort(new Aircraft(Aircraft::Eagle, mTextureHolder));
 	rightEscort->setPosition(80.0f, 50.0f);
 	mPlayer->attachChild(std::move(rightEscort));
+}
+
+CommandQueue & World::getCommandQueue()
+{
+	return mCommandQueue;
 }

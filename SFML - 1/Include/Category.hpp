@@ -13,7 +13,7 @@ namespace Category
 		AlliedAircraft				= 1 << 2,
 		EnemyAircraft				= 1 << 3,
 	};
-}
+};
 
 
 #endif

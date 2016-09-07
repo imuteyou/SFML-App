@@ -7,6 +7,7 @@
 #include "ResourceIdentifiers.hpp"
 #include "SceneNode.hpp"
 #include "Aircraft.hpp"
+#include "CommandQueue.hpp"
 
 
 #include <SFML/System/NonCopyable.hpp>
@@ -24,6 +25,7 @@ public:
 												World(sf::RenderWindow & window);
 	void										update(sf::Time deltaT);
 	void										draw();
+	CommandQueue&								getCommandQueue();
 
 private:
 	enum Layer 
@@ -50,6 +52,7 @@ private:
 	WorldData									mWorld;
 	Aircraft *									mPlayer;
 	sf::Vector2f								mSpawnPosition;
+	CommandQueue								mCommandQueue;
 
 private:
 	void										loadTextures();

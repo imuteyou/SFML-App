@@ -26,8 +26,7 @@ void Game::run()
 	sf::Time timeSinceLastUpdate = sf::Time::Zero;
 	while (mWindow.isOpen())
 	{
-		handleRealTimeInput();
-		handleEvents();
+		processInput();
 		sf::Time elapsedTime = clock.restart();
 
 		if(mIsActive)
@@ -35,8 +34,7 @@ void Game::run()
 
 		while (timeSinceLastUpdate > timePerFrame  && mIsActive)
 		{
-			handleRealTimeInput();
-			handleEvents();
+			processInput();
 			update(timePerFrame);
 
 			timeSinceLastUpdate -= timePerFrame;
@@ -81,45 +79,42 @@ void Game::updateStatistics(sf::Time deltaT)
 
 void Game::processInput()
 {
-	handleRealTimeInput();
-	handleEvents();
-}
-
-void Game::handleRealTimeInput()
-{
-	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Escape))
-		mWindow.close();
-}
-
-void Game::handleEvents()
-{
-	mWindow.setKeyRepeatEnabled(false);
 	sf::Event event;
 
 	while (mWindow.pollEvent(event))
 	{
-		switch (event.type)
-		{	
-			case sf::Event::KeyPressed:
-				if(event.key.code == sf::Keyboard::F3)
-					mStatistics.isActive = !mStatistics.isActive;
-				break;
+		mPlayer.handleEvent(event, mCommandQueue);
+		handleUtilityEvent(event);
 
-			case sf::Event::Closed:
-				mWindow.close();
-				break;
+		if (event.type == sf::Event::Closed)
+			mWindow.close();
+	}
 
-			case sf::Event::LostFocus:
-				mIsActive = false;
-				break;
+	mPlayer.handleRealTimeInput(mCommandQueue);
+}
 
-			case sf::Event::GainedFocus:
-				mIsActive = true;
-				break;
 
-			default:
-				break;
-		}
+void Game::handleUtilityEvent(sf::Event event)
+{
+	mWindow.setKeyRepeatEnabled(false);
+
+	switch (event.type)
+	{	
+		case sf::Event::KeyPressed:
+			if(event.key.code == sf::Keyboard::F3)
+				mStatistics.isActive = !mStatistics.isActive;
+			break;
+
+		case sf::Event::LostFocus:
+			mIsActive = false;
+			break;
+
+		case sf::Event::GainedFocus:
+			mIsActive = true;
+			break;
+
+		default:
+			break;
 	}
 
 	mWindow.setKeyRepeatEnabled(true);

@@ -123,8 +123,10 @@
   <ItemGroup>
     <ClCompile Include="Source\Aircraft.cpp" />
     <ClCompile Include="Source\Command.cpp" />
+    <ClCompile Include="Source\CommandQueue.cpp" />
     <ClCompile Include="Source\Entity.cpp" />
     <ClCompile Include="Source\Game.cpp" />
+    <ClCompile Include="Source\Player.cpp" />
     <ClCompile Include="Source\SceneNode.cpp" />
     <ClCompile Include="Source\Source.cpp" />
     <ClCompile Include="Source\SpriteNode.cpp" />
@@ -138,8 +140,10 @@
     <ClInclude Include="Include\Aircraft.hpp" />
     <ClInclude Include="Include\Category.hpp" />
     <ClInclude Include="Include\Command.hpp" />
+    <ClInclude Include="Include\CommandQueue.hpp" />
     <ClInclude Include="Include\Entity.hpp" />
     <ClInclude Include="Include\Game.hpp" />
+    <ClInclude Include="Include\Player.hpp" />
     <ClInclude Include="Include\ResourceHolder.hpp" />
     <ClInclude Include="Include\ResourceIdentifiers.hpp" />
     <ClInclude Include="Include\SceneNode.hpp" />

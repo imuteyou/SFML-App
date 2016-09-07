@@ -2,15 +2,16 @@
 
 #define GAME_HPP
 
+#include "Player.hpp"
+#include "ResourceHolder.hpp"
+#include "World.hpp"
+#include "ResourceIdentifiers.hpp"
+
+
 #include <SFML/System/Time.hpp>
 #include <SFML/Graphics/RenderWindow.hpp>
 #include <SFML/Graphics/Text.hpp>
 
-
-
-#include "ResourceHolder.hpp"
-#include "World.hpp"
-#include "ResourceIdentifiers.hpp"
 
 
 class Game
@@ -24,8 +25,7 @@ private:
 	void						update(sf::Time deltaT);
 	void						updateStatistics(sf::Time deltaT);
 	void						processInput();
-	void						handleRealTimeInput();
-	void						handleEvents();
+	void						handleUtilityEvent(sf::Event event);
 	void						loadResources();
 
 private:
@@ -33,7 +33,9 @@ private:
 	sf::RenderWindow			mWindow;
 	TextureHolder				mTextureHolder;
 	FontHolder					mFontHolder;
+	CommandQueue				mCommandQueue;
 	World						mWorld;
+	Player						mPlayer;
 	bool						mIsActive;
 
 private:

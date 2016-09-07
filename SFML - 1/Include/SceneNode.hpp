@@ -30,6 +30,7 @@ public:
 	void											attachChild(Ptr child);
 	Ptr												detachChild(const SceneNode & node);
 	void											update(sf::Time deltaT);
+	void											onCommand(const Command & command, sf::Time deltaT);
 
 private:
 	std::vector<Ptr>								mChildren;
@@ -41,7 +42,6 @@ private:
 	virtual void									drawChildren(sf::RenderTarget & target, sf::RenderStates states) const;
 	virtual void									updateCurrent(sf::Time deltaT);
 	void											updateChildren(sf::Time deltaT);
-	void											onCommand(const Command & command, sf::Time deltaT);
 	sf::Transform									getWorldTransform() const;
 	sf::Vector2f									getWorldPosition() const;
 	virtual unsigned int							getCategory() const;

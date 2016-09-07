@@ -17,7 +17,7 @@ public:
 
 private:
 	std::queue<Command>					mQueue;
-}
+};
 
 
 #endif // !COMMANDQUEUE_HPP

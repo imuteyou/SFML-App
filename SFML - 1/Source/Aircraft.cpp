@@ -10,6 +10,9 @@ Textures::ID Aircraft::toTextureID(Aircraft::Type type)
 	
 	case Aircraft::Raptor:
 		return Textures::Raptor;
+
+	default:
+		return Textures::Eagle;
 	}
 }
 
