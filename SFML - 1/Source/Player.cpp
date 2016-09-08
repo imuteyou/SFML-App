@@ -19,6 +19,30 @@ Player::Player()
 		pair.second.category = Category::PlayerAircraft;
 }
 
+void Player::assignKey(Action action, sf::Keyboard::Key key)
+{
+	for (auto iterator = mKeyBinding.begin(); iterator != mKeyBinding.end();)
+	{
+		if (iterator->second == action)
+			mKeyBinding.erase(iterator++);
+		else
+			iterator++;
+	}
+
+	mKeyBinding[key] = action;
+}
+
+sf::Keyboard::Key Player::getAssignedKey(Action action) const
+{
+	for (auto pair : mKeyBinding)
+	{
+		if (pair.second == action)
+			return pair.first;
+	}
+
+	return sf::Keyboard::Unknown;
+}
+
 void Player::handleEvent(const sf::Event & event, CommandQueue & commands)
 {
 	if (event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::P)
@@ -47,14 +71,17 @@ bool Player::isRealTimeAction(Action action)
 {
 	switch (action)
 	{
-	case MoveLeft:
-	case MoveRight:
-	case MoveDown:
-	case MoveUp:
-		return true;
+		case MoveLeft:
+			return true;
+		case MoveRight:
+			return true;
+		case MoveDown:
+			return true;
+		case MoveUp:
+			return true;
 
-	default:
-		return false;
+		default:
+			return false;
 	}
 }
 

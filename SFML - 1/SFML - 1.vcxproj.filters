@@ -16,6 +16,15 @@
     <Filter Include="Inline Files">
       <UniqueIdentifier>{33ad0304-b9d6-4aab-aab6-5d77ed25a873}</UniqueIdentifier>
     </Filter>
+    <Filter Include="State Files">
+      <UniqueIdentifier>{0c481e28-6aef-4260-9f51-08ab33c8f364}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="State Files\Header Files">
+      <UniqueIdentifier>{30b8b80b-1771-4b51-a105-7be83a73446a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="State Files\Source Files">
+      <UniqueIdentifier>{aaca6595-c466-40d0-b495-815aa09b43ca}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Source\Entity.cpp">
@@ -47,6 +56,12 @@
     </ClCompile>
     <ClCompile Include="Source\Player.cpp">
       <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\State.cpp">
+      <Filter>State Files\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\StateStack.cpp">
+      <Filter>State Files\Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -96,6 +111,15 @@
     </ClInclude>
     <ClInclude Include="Include\Player.hpp">
       <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\State.hpp">
+      <Filter>State Files\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\StateIdentifiers.hpp">
+      <Filter>State Files\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\StateStack.hpp">
+      <Filter>State Files\Header Files</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

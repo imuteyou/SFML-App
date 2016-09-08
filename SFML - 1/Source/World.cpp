@@ -41,6 +41,8 @@ void World::update(sf::Time deltaT)
 
 	mPlayer->addVelocity(0.0f, mWorld.ScrollSpeed);
 
+	mSceneGraph.update(deltaT);
+
 	sf::FloatRect viewBounds(mView.getCenter() - mView.getSize() / 2.0f, mView.getSize());
 	const float borderDistance = 100.0f;
 	sf::Vector2f position = mPlayer->getPosition();
@@ -50,7 +52,6 @@ void World::update(sf::Time deltaT)
 	position.y = std::min(position.y, viewBounds.top + viewBounds.height - borderDistance);
 	mPlayer->setPosition(position);
 
-	mSceneGraph.update(deltaT);
 }
 
 void World::draw()
